@@ -3,10 +3,13 @@
 #include<iostream>
 #include<fstream>
 #include<string>
+#include<iomanip>
+
+using namespace std;
 
 //constantes globales
 const int NumJugadores = 2;
-const int NumFichas = 10;
+const int NumFichas = 8;
 const int IniFichas = 13;
 const int maxNumFichas = 50;
 const int MaxJugadas = NumFichas * 2;
@@ -44,20 +47,23 @@ struct tBolsa
 
 
 //cabecera de funciones
-int menu();
+int menu(); //funcion que expresa el menú de las opciones
 
-void colorTexto(tColor color);
+void colorTexto(tColor color); // funcion usada para que el texto se pueda distinquir con colores
 
-void inicializarBolsa(tBolsa& bolsa);
+void inicializarBolsa(tBolsa& bolsa); //funcion para inicializar, es decir dar los valores iniciales a las fichas en la bolsa
 
-tFicha robar(tBolsa& bolsa);
+void mostrar(const tBolsa & bolsa); //funcion para mostrar el estado de la bolsa
+
+tFicha robar(tBolsa& bolsa); //funcion para robar(coger) fichas de la bolsa
 
 int main()
 {
+	tBolsa bolsa;
 	//int opcionMenu = menu();
-
-
-
+	inicializarBolsa(bolsa);
+	mostrar(bolsa);
+	
 	return 0;
 }
 
@@ -97,15 +103,16 @@ void inicializarBolsa(tBolsa& bolsa)
 			else if (color == 3)
 			{
 				bolsa.matrizBolsa[i][j].color = amarillo;
-				color = 0;
 			}
-			bolsa.matrizBolsa[i][j].numero = j;
+			bolsa.matrizBolsa[i][j].numero = j + 1;
 			color++;
+			if(color==4)
+			{
+				color = rojo;
+			}
 		}
 	}
 }
-
-
 
 void colorTexto(tColor color) {
 	switch (color) {
@@ -127,7 +134,17 @@ void colorTexto(tColor color) {
 	}
 }
 
-tFicha robar(tBolsa& bolsa)
+void mostrar(const tBolsa & bolsa)
 {
-
+	for(int i = 0; i < NumFichas; i++)
+	{	
+		for(int j = 0; j < NumFichas;j++)
+		{
+			colorTexto(bolsa.matrizBolsa[i][j].color);
+			std::cout<<bolsa.matrizBolsa[i][j].numero<<setw(1);
+		}
+		std::cout<<"\n";
+	}
 }
+
+//tFicha robar(tBolsa& bolsa)
