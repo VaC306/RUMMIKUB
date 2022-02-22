@@ -27,7 +27,7 @@ typedef tFicha tSoporte[maxNumFichas];
 typedef tSoporte tSoportes[NumJugadores];
 
 typedef tFicha Bolsa[NumFichas][NumFichas];
-
+ 
 typedef tFicha tJugada[NumFichas + 1];
 
 typedef tFicha tListaJugadas[MaxJugadas];
@@ -54,6 +54,8 @@ void colorTexto(tColor color); // funcion usada para que el texto se pueda disti
 void inicializarBolsa(tBolsa& bolsa); //funcion para inicializar, es decir dar los valores iniciales a las fichas en la bolsa
 
 void mostrar(const tBolsa & bolsa); //funcion para mostrar el estado de la bolsa
+
+void repartir(tBolsa& bolsa, tSoportes &soportes); //funcion para repartir Inifichas de la bolsa a cada jugador y las coloca en el soporte
 
 tFicha robar(tBolsa& bolsa); //funcion para robar(coger) fichas de la bolsa
 
@@ -145,6 +147,11 @@ void mostrar(const tBolsa & bolsa)
 		}
 		std::cout<<"\n";
 	}
+}
+
+void repartir(tBolsa& bolsa, tSoportes &soportes)
+{
+	
 }
 
 //tFicha robar(tBolsa& bolsa)
