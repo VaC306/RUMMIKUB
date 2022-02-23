@@ -4,13 +4,14 @@
 #include<fstream>
 #include<string>
 #include<iomanip>
+#include<stdlib.h>
 
 using namespace std;
 
 //constantes globales
 const int NumJugadores = 2;
 const int NumFichas = 8;
-const int IniFichas = 13;
+const int IniFichas = 6;
 const int maxNumFichas = 50;
 const int MaxJugadas = NumFichas * 2;
 
@@ -62,7 +63,9 @@ tFicha robar(tBolsa& bolsa); //funcion para robar(coger) fichas de la bolsa
 int main()
 {
 	tBolsa bolsa;
+	srand(time(NULL));
 	//int opcionMenu = menu();
+	
 	inicializarBolsa(bolsa);
 	mostrar(bolsa);
 	
@@ -86,9 +89,9 @@ int menu()
 void inicializarBolsa(tBolsa& bolsa)
 {
 	int color = 0;
-	for (int i = 0; i < (NumFichas); i++)
+	for (int i = 0; i < NumFichas; i++)
 	{
-		for (int j = 0; j < (NumFichas); j++)
+		for (int j = 0; j < NumFichas; j++)
 		{
 			if(color == 0)
 			{
@@ -143,7 +146,7 @@ void mostrar(const tBolsa & bolsa)
 		for(int j = 0; j < NumFichas;j++)
 		{
 			colorTexto(bolsa.matrizBolsa[i][j].color);
-			std::cout<<bolsa.matrizBolsa[i][j].numero<<setw(1);
+			std::cout<<bolsa.matrizBolsa[i][j].numero<<"   ";
 		}
 		std::cout<<"\n";
 	}
