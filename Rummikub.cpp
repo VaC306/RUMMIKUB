@@ -141,20 +141,46 @@ void colorTexto(tColor color) {
 
 void mostrar(const tBolsa & bolsa)
 {
-	for(int i = 0; i < NumFichas; i++)
+	for(int j = 0; j < NumFichas; j++)
 	{	
-		for(int j = 0; j < NumFichas;j++)
+		for(int i = 0; i < NumFichas;i++)
 		{
 			colorTexto(bolsa.matrizBolsa[i][j].color);
-			std::cout<<bolsa.matrizBolsa[i][j].numero<<"   ";
+			std::cout<<bolsa.matrizBolsa[j][i].numero<<"   ";
 		}
 		std::cout<<"\n";
 	}
 }
 
-void repartir(tBolsa& bolsa, tSoportes &soportes)
+//void repartir(tBolsa& bolsa, tSoportes &soportes)
+
+tFicha robar(tBolsa& bolsa)
 {
-	
+	tFicha ficha;
+	int i = rand() % NumFichas;
+	int j = rand() % NumFichas;
+	if((bolsa.matrizBolsa[i][j].numero != -1) && (bolsa.matrizBolsa[i][j].color != libre))
+	{
+		ficha.numero = bolsa.matrizBolsa[i][j].numero;
+		ficha.color = bolsa.matrizBolsa[i][j].color;
+		bolsa.matrizBolsa[i][j].numero = -1;
+		bolsa.matrizBolsa[i][j].color = libre;
+	}
+	else
+	{
+		
+	}
+
+	return ficha;
 }
 
-//tFicha robar(tBolsa& bolsa)
+void buscarFichaLibre(tBolsa& Bolsa)
+{
+	for (int i = 0; i < NumFichas; i++)
+	{
+		for (int j = 0; j < NumFichas; j++)
+		{
+			
+		}
+	}
+}
