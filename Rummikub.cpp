@@ -60,6 +60,8 @@ void inicializarBolsa(tBolsa& bolsa); //funcion para inicializar, es decir dar l
 
 void mostrar(const tBolsa& bolsa); //funcion para mostrar el estado de la bolsa
 
+void mostrarSoportes(const tSoportes& soporte); //funcion para mostrar el estado de el soporte
+
 void repartir(tBolsa& bolsa, tSoportes& soportes); //funcion para repartir Inifichas de la bolsa a cada jugador y las coloca en el soporte
 
 tFicha robar(tBolsa& bolsa); //funcion para robar(coger) fichas de la bolsa
@@ -67,11 +69,16 @@ tFicha robar(tBolsa& bolsa); //funcion para robar(coger) fichas de la bolsa
 int main()
 {
 	tBolsa bolsa;
+	tSoportes soportes;
 	srand(time(NULL));
 	//int opcionMenu = menu();
 
 	inicializarBolsa(bolsa);
 	mostrar(bolsa);
+	repartir(bolsa,soportes);
+	std::cout<<"\n";
+	mostrarSoportes(soportes);
+
 
 	return 0;
 }
@@ -126,25 +133,30 @@ void inicializarBolsa(tBolsa& bolsa)
 void colorTexto(tColor color) {
 	switch (color) {
 	case amarillo:
-		std::cout << "\033[1;40;33m";
+		//std::cout << "\033[1;40;33m";
+		std::cout<<"amar "; 
 		break;
 	case azul:
-		std::cout << "\033[40;34m";
+		//std::cout << "\033[40;34m";
+		std::cout<<"azul ";
 		break;
 	case rojo:
-		std::cout << "\033[40;31m";
+		//std::cout << "\033[40;31m";
+		std::cout<<"rojo ";
 		break;
 	case verde:
-		std::cout << "\033[40;32m";
+		//std::cout << "\033[40;32m";
+		std::cout<<"verd ";
 		break;
 	case blanco:
-		std::cout << "\033[40;37m";
+		//std::cout << "\033[40;37m";
 		break;
 	}
 }
 
 void mostrar(const tBolsa& bolsa)
 {
+	std::cout<<"Bolsa...";
 	for (int j = 0; j < NumFichas; j++)
 	{
 		for (int i = 0; i < NumFichas; i++)
@@ -156,7 +168,20 @@ void mostrar(const tBolsa& bolsa)
 	}
 }
 
-//void repartir(tBolsa& bolsa, tSoportes &soportes)
+void mostrarSoportes(const tSoportes& soportes)
+{
+	std::cout<<"Soportes...";
+	for(int i = 0; i < NumJugadores; i++)
+	{
+		for(int j = 0; j < IniFichas;j++)
+		{
+			colorTexto(soportes.soporte[i][j].color);
+			std::cout<<soportes.soporte[i][j].numero <<"   ";
+
+		}
+		std::cout<<"\n";
+	}
+}
 
 tFicha robar(tBolsa& bolsa)
 {
@@ -217,12 +242,12 @@ tFicha robar(tBolsa& bolsa)
 
 void repartir(tBolsa& bolsa, tSoportes& soportes)
 {
-	
+	std::cout<<"Repartir fichas";
 	for (int i = 0; i < NumJugadores; i++)
 	{
 		for (int j = 0; j < IniFichas; j++)
 		{
-			soportes.soporte[i].numero = robar(bolsa);
+			soportes.soporte[i][j] = robar(bolsa);
 		}
 	}
 }
