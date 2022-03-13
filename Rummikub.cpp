@@ -78,7 +78,7 @@ int main()
 	repartir(bolsa,soportes);
 	std::cout<<"\n";
 	mostrarSoportes(soportes);
-
+	mostrar(bolsa);
 
 	return 0;
 }
@@ -133,50 +133,52 @@ void inicializarBolsa(tBolsa& bolsa)
 void colorTexto(tColor color) {
 	switch (color) {
 	case amarillo:
-		//std::cout << "\033[1;40;33m";
-		std::cout<<"amar "; 
+		std::cout << "\033[1;40;33m";
+		//std::cout<<"amar"; 
 		break;
 	case azul:
-		//std::cout << "\033[40;34m";
-		std::cout<<"azul ";
+		std::cout << "\033[40;34m";
+		//std::cout<<"azul";
 		break;
 	case rojo:
-		//std::cout << "\033[40;31m";
-		std::cout<<"rojo ";
+		std::cout << "\033[40;31m";
+		//std::cout<<"rojo";
 		break;
 	case verde:
-		//std::cout << "\033[40;32m";
-		std::cout<<"verd ";
+		std::cout << "\033[40;32m";
+		//std::cout<<"verd";
 		break;
 	case blanco:
-		//std::cout << "\033[40;37m";
+		std::cout << "\033[40;37m";
 		break;
 	}
+	cout<<"  ";
 }
 
 void mostrar(const tBolsa& bolsa)
 {
-	std::cout<<"Bolsa...";
+	std::cout<<"Bolsa..."<<"\n";
 	for (int j = 0; j < NumFichas; j++)
 	{
 		for (int i = 0; i < NumFichas; i++)
 		{
 			colorTexto(bolsa.matrizBolsa[i][j].color);
-			std::cout << bolsa.matrizBolsa[j][i].numero << "   ";
+			std::cout << bolsa.matrizBolsa[j][i].numero <<setw(8);
 		}
 		std::cout << "\n";
 	}
+	std::cout<<"\n";
 }
 
 void mostrarSoportes(const tSoportes& soportes)
 {
-	std::cout<<"Soportes...";
+	std::cout<<"Soportes..."<<"\n";
 	for(int i = 0; i < NumJugadores; i++)
 	{
 		for(int j = 0; j < IniFichas;j++)
 		{
 			colorTexto(soportes.soporte[i][j].color);
-			std::cout<<soportes.soporte[i][j].numero <<"   ";
+			std::cout<<soportes.soporte[i][j].numero <<setw(8);
 
 		}
 		std::cout<<"\n";
@@ -190,6 +192,7 @@ tFicha robar(tBolsa& bolsa)
 	int j = rand() % NumFichas;
 	int x = NumFichas;
 	int y = NumFichas;
+	bool ok = false;
 	if ((bolsa.matrizBolsa[i][j].numero != -1) && (bolsa.matrizBolsa[i][j].color != libre))
 	{
 		ficha.numero = bolsa.matrizBolsa[i][j].numero;
@@ -210,22 +213,20 @@ tFicha robar(tBolsa& bolsa)
 					bolsa.matrizBolsa[a][b].numero = -1;
 					bolsa.matrizBolsa[a][b].color = libre;
 				}
-				else if(a == NumFichas && b == NumFichas)
+				if(a == NumFichas && b == NumFichas)
 				{
 					a = 0;
 					b = 0;
 					x = i;
 					y = j;
 				}
-				else if (a == i && b == j)
+				if(a == i && b == j)
 				{
 					ficha.numero = -1;
 				}
 			}
 		}
-		
 	}
-
 	return ficha;
 }
 
