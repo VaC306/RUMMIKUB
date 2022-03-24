@@ -163,7 +163,7 @@ void mostrar(const tBolsa& bolsa)
 		for (int i = 0; i < NumFichas; i++)
 		{
 			colorTexto(bolsa.matrizBolsa[i][j].color);
-			std::cout << bolsa.matrizBolsa[j][i].numero <<setw(8);
+			std::cout <<setw(2)<< bolsa.matrizBolsa[j][i].numero;
 		}
 		std::cout << "\n";
 	}
@@ -193,14 +193,7 @@ tFicha robar(tBolsa& bolsa)
 	int x = NumFichas;
 	int y = NumFichas;
 	bool ok = false;
-	if ((bolsa.matrizBolsa[i][j].numero != -1) && (bolsa.matrizBolsa[i][j].color != libre))
-	{
-		ficha.numero = bolsa.matrizBolsa[i][j].numero;
-		ficha.color = bolsa.matrizBolsa[i][j].color;
-		bolsa.matrizBolsa[i][j].numero = -1;
-		bolsa.matrizBolsa[i][j].color = libre;
-	}
-	else
+	if ((bolsa.matrizBolsa[i][j].numero == -1) && (bolsa.matrizBolsa[i][j].color == libre))
 	{
 		for (int a = i; a < x; a++)
 		{
@@ -224,8 +217,16 @@ tFicha robar(tBolsa& bolsa)
 				{
 					ficha.numero = -1;
 				}
+				bolsa.contador++;
 			}
 		}
+	}
+	else
+	{
+		ficha.numero = bolsa.matrizBolsa[i][j].numero;
+		ficha.color = bolsa.matrizBolsa[i][j].color;
+		bolsa.matrizBolsa[i][j].numero = -1;
+		bolsa.matrizBolsa[i][j].color = libre;
 	}
 	return ficha;
 }
