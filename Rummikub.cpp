@@ -76,6 +76,8 @@ void mostrarFicha(const tFicha& ficha);
 
 void ordenarPorColor(tSoporte& soporte);
 
+void mostrarSeries(const tSoporte & soporte);
+
 bool colores(tFicha soporte, tFicha ficha);
 
 tFicha robar(tBolsa& bolsa); //funcion para robar(coger) fichas de la bolsa
@@ -94,7 +96,7 @@ int main()
 	std::cout<<"\n";
 	std::cout<<"Turno del jugador: "<<turno<<"\n";
 	
-	while(option != 0 )  
+	while(option != 0)  
 	{
 		option = menu();
 
@@ -116,14 +118,7 @@ int main()
 		{
 			
 		}
-		else
-		{
-			std::cout<<"No puede introducir ese valor, vuelva a intentarlo";
-			std::cin>>option;
-		}
 	} 
-
-
 	return 0;
 }
 
@@ -133,6 +128,11 @@ int menu()
 	int num;
 	cout << "1: Ordenar por num, 2: Ordenar por color, 3: Sugerir, 4: Poner, 0: Fin >>>  ";
 	cin >> num;
+	while(num < 0 || num > 4)
+	{
+		std::cout<<"EL VALOR QUE HA INTRODUCIDO ES INCORRECTO, VUELVA A INTENTARLO:";
+		std::cin>>num;
+	}
 	return num;
 }
 
@@ -372,7 +372,7 @@ bool colores(tFicha soporte, tFicha ficha)
 	return mayor;
 }
 
-void ordenarPorColor(tSoporte& soporte)
+void ordenarPorColor(tSoporte &soporte)
 {
 	int posicion;
 	tFicha ficha;
@@ -388,6 +388,18 @@ void ordenarPorColor(tSoporte& soporte)
 		{
 			posicion++;
 		}
-	}
+		for (int j = i; j > posicion; j--) {
+
+            soporte.fichas[j] = soporte.fichas[j - 1];
+        }
+
+        soporte.fichas[posicion] = ficha;
+	}	
+}
+
+void mostrarSeries(const tSoporte &soporte)
+{
+
+
 
 }
